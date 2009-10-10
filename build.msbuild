@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-   <!--<Import Project="Dependencies\microsoft.sdc\Microsoft.Sdc.Common.tasks" />
+   <!--<Import Project="Dependencies\microsoft.sdc\Microsoft.Sdc.Common.tasks" />-->
    <UsingTask
 		AssemblyFile="Dependencies\xunit\xunit.runner.msbuild.dll"
 		TaskName="Xunit.Runner.MSBuild.xunit" />
-   <UsingTask
+	<!--<UsingTask
 		AssemblyFile="Dependencies\CodePlex.MSBuildTasks.dll"
 		TaskName="CodePlex.MSBuildTasks.RegexReplace" />-->
 
@@ -13,7 +13,7 @@
    <PropertyGroup Condition="'$(Configuration)' == ''">
       <Configuration>Debug</Configuration>
    </PropertyGroup>
-   <PropertyGroup Condition="'$(AppPool)' == ''">
+   <!--<PropertyGroup Condition="'$(AppPool)' == ''">
       <AppPool>teamboard</AppPool>
    </PropertyGroup>
    <PropertyGroup Condition="'$(WebSite)' == ''">
@@ -24,7 +24,7 @@
    </PropertyGroup>
    <PropertyGroup Condition="'$(Port)' == ''">
       <Port>80</Port>
-   </PropertyGroup>
+   </PropertyGroup>-->
 
    <!-- Build server targets -->
    <Target Name="Deploy">
@@ -43,10 +43,10 @@
 
    <!-- Individiual targets -->
    <Target Name="Clean">
-      <!--<CreateItem Include="Tests\bin\$(Configuration)\TestResults.xml">
+      <CreateItem Include="Tests\bin\$(Configuration)\TestResults.xml">
          <Output TaskParameter="Include" ItemName="CleanFileList" />
       </CreateItem>
-      <Delete Files="@(CleanFileList)"/>-->
+      <Delete Files="@(CleanFileList)"/>
       <MSBuild
 			 Projects="teamboard.sln"
 			 Targets="Clean"
@@ -61,7 +61,7 @@
    </Target>
 
    <Target Name="UnitTests" DependsOnTargets="Build">
-      <!--<xunit Assembly="Tests\bin\$(Configuration)\TeamBoard.Tests.dll" NUnitXml="Tests\bin\$(Configuration)\TestResults.xml" />-->
+      <xunit Assembly="Tests\bin\$(Configuration)\TeamBoard.Tests.dll" NUnitXml="Tests\bin\$(Configuration)\TestResults.xml" />
    </Target>
 
    <Target Name="CreateSite" DependsOnTargets="CreateAppPool">
