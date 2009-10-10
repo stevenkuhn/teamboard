@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+   <!--<Import Project="Dependencies\microsoft.sdc\Microsoft.Sdc.Common.tasks" />
+   <UsingTask
+		AssemblyFile="Dependencies\xunit\xunit.runner.msbuild.dll"
+		TaskName="Xunit.Runner.MSBuild.xunit" />
+   <UsingTask
+		AssemblyFile="Dependencies\CodePlex.MSBuildTasks.dll"
+		TaskName="CodePlex.MSBuildTasks.RegexReplace" />-->
+
+   <!-- Settings -->
+   <PropertyGroup Condition="'$(Configuration)' == ''">
+      <Configuration>Debug</Configuration>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(AppPool)' == ''">
+      <AppPool>teamboard</AppPool>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(WebSite)' == ''">
+      <WebSite>teamboard</WebSite>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(IPAddress)' == ''">
+      <IPAddress>*</IPAddress>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Port)' == ''">
+      <Port>80</Port>
+   </PropertyGroup>
+
+   <!-- Build server targets -->
+   <Target Name="Deploy">
+      <CallTarget Targets="Test" />
+      <CallTarget Targets="CreateSite" />
+      <!--<MSBuild Projects="Web/Web.csproj" Targets="ResolveReferences;_CopyWebApplication" Properties="WebProjectOutputDir=$(DeploymentFolder);OutDir=$(WebProjectOutputDir)\" />-->
+   </Target>
+
+   <Target Name="CI" DependsOnTargets="Test">
+   </Target>
+   
+   <Target Name="Test">
+      <CallTarget Targets="Clean" />
+      <CallTarget Targets="UnitTests" />
+   </Target>
+
+   <!-- Individiual targets -->
+   <Target Name="Clean">
+      <!--<CreateItem Include="Tests\bin\$(Configuration)\TestResults.xml">
+         <Output TaskParameter="Include" ItemName="CleanFileList" />
+      </CreateItem>
+      <Delete Files="@(CleanFileList)"/>-->
+      <!--<MSBuild
+			 Projects="teamboard.sln"
+			 Targets="Clean"
+			 Properties="Configuration=$(Configuration)"/>-->
+   </Target>
+
+   <Target Name="Build">
+      <!--<MSBuild
+			 Projects="teamboard.sln"
+			 Targets="Build"
+			 Properties="Configuration=$(Configuration)"/>-->
+   </Target>
+
+   <Target Name="UnitTests" DependsOnTargets="Build">
+      <!--<xunit Assembly="Tests\bin\$(Configuration)\TeamBoard.Tests.dll" NUnitXml="Tests\bin\$(Configuration)\TestResults.xml" />-->
+   </Target>
+
+   <Target Name="CreateSite" DependsOnTargets="CreateAppPool">
+      <Error Text="The DeploymentFolder property must be set on the command line."
+            Condition="'$(DeploymentFolder)' == ''" />
+   
+      <!--<Web.WebSite.Exists Description="$(WebSite)">
+         <Output TaskParameter="DoesExist" PropertyName="WebSiteExists"/>
+      </Web.WebSite.Exists>
+
+      <Web.WebSite.Create Condition="!$(WebSiteExists) And $(HostName) == ''"
+                          Description="$(WebSite)"
+								  AppPoolId="$(AppPool)"
+								  Path="$(DeploymentFolder)"
+								  Port="$(Port)" />
+								  
+      <Web.WebSite.Create Condition="!$(WebSiteExists) And $(HostName) != ''"
+                          Description="$(WebSite)"
+								  AppPoolId="$(AppPool)"
+								  Path="$(DeploymentFolder)"
+								  HostName="$(HostName)"
+								  Port="$(Port)" />-->
+   </Target>
+
+   <Target Name="CreateAppPool">
+      <!--<Web.AppPool.Exists AppPoolName="$(AppPool)">
+         <Output TaskParameter="DoesExist" PropertyName="AppPoolExists"/>
+      </Web.AppPool.Exists>
+      
+      <Web.AppPool.Create Condition="!$(AppPoolExists)" AppPoolName="$(AppPool)"
+                          IdentityType="ApplicationPoolIdentity" PipelineMode="Integrated" />-->
+   </Target>
+
+   <Target Name="DeleteSite">
+      <!--<Web.WebSite.Exists Description="$(WebSite)">
+         <Output TaskParameter="DoesExist" PropertyName="WebSiteExists"/>
+      </Web.WebSite.Exists>
+
+      <Web.WebSite.DeleteWebSite Condition="$(WebSiteExists)" Description="$(WebSite)" />-->
+   </Target>
+
+   <Target Name="DeleteAppPool" DependsOnTargets="DeleteSite">
+      <!--<Web.AppPool.Exists AppPoolName="$(AppPool)">
+         <Output TaskParameter="DoesExist" PropertyName="AppPoolExists"/>
+      </Web.AppPool.Exists>
+
+      <Web.AppPool.DeleteAppPool Condition="$(AppPoolExists)" AppPoolName="$(AppPool)" />-->
+   </Target>
+   
+</Project>
