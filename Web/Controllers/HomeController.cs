@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamBoard.Services;
 
 namespace TeamBoard.Web.Controllers
 {
@@ -14,8 +15,11 @@ namespace TeamBoard.Web.Controllers
 			return View();
 		}
 
-		public ActionResult About()
+		public ActionResult Mockup()
 		{
+			//var service = new WorkItemService();
+			//var items = service.GetWorkItems("TeamBoard");
+
 			return View();
 		}
 	}

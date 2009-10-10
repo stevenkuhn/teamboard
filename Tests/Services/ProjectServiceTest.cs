@@ -17,7 +17,7 @@ namespace TeamBoard.Tests.Services
 			var config = new TeamBoard.Infrastructure.Configuration();
 			config.TeamFoundationServerName = "https://tfs06.codeplex.com:443";
 			config.Login = ConfigurationManager.AppSettings["tfsUserName"];
-			config.Password = ConfigurationManager.AppSettings["tfsUserName"];
+			config.Password = ConfigurationManager.AppSettings["tfsPassword"];
 			config.Domain = "snd";
 			var projectService = new ProjectService(config);
 
