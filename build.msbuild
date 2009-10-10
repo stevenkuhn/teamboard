@@ -47,17 +47,17 @@
          <Output TaskParameter="Include" ItemName="CleanFileList" />
       </CreateItem>
       <Delete Files="@(CleanFileList)"/>-->
-      <!--<MSBuild
+      <MSBuild
 			 Projects="teamboard.sln"
 			 Targets="Clean"
-			 Properties="Configuration=$(Configuration)"/>-->
+			 Properties="Configuration=$(Configuration)"/>
    </Target>
 
    <Target Name="Build">
-      <!--<MSBuild
+      <MSBuild
 			 Projects="teamboard.sln"
 			 Targets="Build"
-			 Properties="Configuration=$(Configuration)"/>-->
+			 Properties="Configuration=$(Configuration)"/>
    </Target>
 
    <Target Name="UnitTests" DependsOnTargets="Build">
