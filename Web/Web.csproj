@@ -91,6 +91,16 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{F632FCC2-DEDF-4289-901A-85D0EDEFE883}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{0CF1DA18-C356-4D24-99DF-3546E07C8147}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
