@@ -12,3 +12,4 @@ Deployment
 *.swp
 *.Publish.xml
 Thumbs.db
+*.config
