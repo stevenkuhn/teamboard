@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7AC6C3DB-995A-4641-8FE9-ADC57D41AD57}</ProjectGuid>
+    <ProjectGuid>{FC4FF57D-536E-4CDF-87EA-5877854850F3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TeamBoard.Tests</RootNamespace>
-    <AssemblyName>TeamBoard.Tests</AssemblyName>
+    <RootNamespace>TeamBoard.Infrastructure</RootNamespace>
+    <AssemblyName>TeamBoard.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,19 +43,11 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit, Version=1.5.0.1479, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\xunit\xunit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{FC4FF57D-536E-4CDF-87EA-5877854850F3}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{F632FCC2-DEDF-4289-901A-85D0EDEFE883}</Project>
       <Name>Model</Name>
@@ -64,14 +56,6 @@
       <Project>{0CF1DA18-C356-4D24-99DF-3546E07C8147}</Project>
       <Name>Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Web\Web.csproj">
-      <Project>{98AB4189-BF03-45DB-BE17-FFE812FFBFD2}</Project>
-      <Name>Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Web\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
