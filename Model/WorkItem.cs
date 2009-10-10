@@ -12,9 +12,10 @@ namespace TeamBoard.Model
 		{
 
 		}
+		public String Id { get; set; }
 		public string Summary { get; set; }
 		public string Description { get; set; }
 		public int Priority { get; set; }
-		public Project Project { get; set; }
+		public string ProjectName { get; set; }
 	}
 }
