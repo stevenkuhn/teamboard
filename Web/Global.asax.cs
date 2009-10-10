@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject.Web.Mvc;
 using Ninject;
+using System.Reflection;
 
 namespace TeamBoard.Web
 {
@@ -29,6 +30,7 @@ namespace TeamBoard.Web
 		protected override void OnApplicationStarted()
 		{
 			RegisterRoutes(RouteTable.Routes);
+			RegisterAllControllersIn(Assembly.GetExecutingAssembly());
 		}
 
 		protected override IKernel CreateKernel()
