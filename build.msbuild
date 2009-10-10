@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-   <!--<Import Project="Dependencies\microsoft.sdc\Microsoft.Sdc.Common.tasks" />-->
+   <Import Project="Dependencies\microsoft.sdc\Microsoft.Sdc.Common.tasks" />
    <UsingTask
 		AssemblyFile="Dependencies\xunit\xunit.runner.msbuild.dll"
 		TaskName="Xunit.Runner.MSBuild.xunit" />
-	<!--<UsingTask
+	<UsingTask
 		AssemblyFile="Dependencies\CodePlex.MSBuildTasks.dll"
-		TaskName="CodePlex.MSBuildTasks.RegexReplace" />-->
+		TaskName="CodePlex.MSBuildTasks.RegexReplace" />
 
    <!-- Settings -->
    <PropertyGroup Condition="'$(Configuration)' == ''">
@@ -37,6 +37,13 @@
    </Target>
    
    <Target Name="Test">
+		<Error Text="The TFSUserName property must be set on the command line."
+			  Condition="'$(TFSUserName)' == ''" />
+		<Error Text="The TFSPassword property must be set on the command line."
+			  Condition="'$(TFSPassword)' == ''" />
+
+		<CallTarget Targets="SetTFSCredentials" />
+		
       <CallTarget Targets="Clean" />
       <CallTarget Targets="UnitTests" />
    </Target>
@@ -63,6 +70,17 @@
    <Target Name="UnitTests" DependsOnTargets="Build">
       <xunit Assembly="Tests\bin\$(Configuration)\TeamBoard.Tests.dll" NUnitXml="Tests\bin\$(Configuration)\TestResults.xml" />
    </Target>
+
+	<Target Name="SetTFSCredentials">
+		<RegexReplace
+			 Pattern='key="tfsUserName" value="(.+)"'
+			 Replacement='key="tfsUserName" value="$(TFSUserName)"'
+			 Files='Tests\app.config'/>
+		<RegexReplace
+			 Pattern='key="tfsPassword" value="(.+)"'
+			 Replacement='key="tfsPassword" value="$(TFSPassword)"'
+			 Files='Tests\app.config'/>
+	</Target>
 
    <Target Name="CreateSite" DependsOnTargets="CreateAppPool">
       <Error Text="The DeploymentFolder property must be set on the command line."

@@ -17,8 +17,8 @@ namespace TeamBoard.Web.Controllers
 
 		public ActionResult Mockup()
 		{
-			var service = new WorkItemService();
-			var items = service.GetWorkItems("TeamBoard");
+			//var service = new WorkItemService();
+			//var items = service.GetWorkItems("TeamBoard");
 
 			return View();
 		}

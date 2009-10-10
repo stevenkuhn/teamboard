@@ -13,9 +13,8 @@ namespace TeamBoard.Services
 {
 	public class WorkItemService
 	{
-
 		private IConfiguration _config;
-    public WorkItemService(IConfiguration config)
+		public WorkItemService(IConfiguration config)
 		{
 			_config = config;
 		}
