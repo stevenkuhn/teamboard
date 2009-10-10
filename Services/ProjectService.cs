@@ -11,7 +11,7 @@ namespace TeamBoard.Services
 	public class ProjectService
 	{
 		private IConfiguration _config;
-    /// <summary>
+		/// <summary>
 		/// Initializes a new instance of the ProjectService class.
 		/// </summary>
 		public ProjectService(IConfiguration config)

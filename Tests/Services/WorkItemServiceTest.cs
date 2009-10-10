@@ -22,9 +22,9 @@ namespace TeamBoard.Tests.Services
 			config.WorkItemMappings = new Dictionary<string, Dictionary<string, string>>();
 			config.WorkItemMappings.Add("teamboard", new Dictionary<string, string>(){
 						{"Id","System.Id"},
-									{"Summary", "System.Title"},
-									{"Description", "System.Description"},
-									{"Priority", "CodePlex.Custom"}
+						{"Summary", "System.Title"},
+						{"Description", "System.Description"},
+						{"Priority", "CodePlex.Custom"}
 					});
 			var projectService = new WorkItemService(config);
 
