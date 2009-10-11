@@ -78,7 +78,10 @@ namespace TeamBoard.Services
 			}
 		}
 
-
+		public void UpdatePriorities(string projectName, IList<string> orderedWorkItemIds)
+		{
+			throw new NotImplementedException();
+		}
 
 		private TeamFoundationServer GetServer()
 		{
