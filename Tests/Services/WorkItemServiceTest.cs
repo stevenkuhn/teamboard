@@ -29,7 +29,7 @@ namespace TeamBoard.Tests.Services
 			var projectService = new WorkItemService(config);
 
 			var list = projectService.GetWorkItems("teamboard");
-			Assert.Equal(list.Count, 1);
+			Assert.Equal(true, list.Any());
 		}
 
 		[Fact]
@@ -50,7 +50,7 @@ namespace TeamBoard.Tests.Services
 			var projectService = new WorkItemService(config);
 
 			var list = projectService.GetWorkItems("teamboard", "teamboard");
-			Assert.Equal(list.Count, 1);
+			Assert.Equal(true, list.Any());
 		}
 	}
 }

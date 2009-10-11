@@ -22,7 +22,7 @@ namespace TeamBoard.Tests.Services
 			var projectService = new ProjectService(config);
 
 			var list = projectService.GetProjects();
-			Assert.Equal(list.Count, 1);
+			Assert.Equal(true, list.Any());
 		}
 
 	}
