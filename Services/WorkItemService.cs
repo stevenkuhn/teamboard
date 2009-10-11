@@ -110,7 +110,21 @@ namespace TeamBoard.Services
 
 		public void UpdatePriorities(string projectName, IList<string> orderedWorkItemIds)
 		{
-			throw new NotImplementedException();
+			var workItemMappings = _config.WorkItemMappings[projectName];
+			using (var tfs = GetServer())
+			{
+				tfs.EnsureAuthenticated();
+				int priority = 1;
+				var workItemStore = (WorkItemStore)tfs.GetService(typeof(WorkItemStore));
+				foreach (string workItemId in orderedWorkItemIds)
+				{
+					var workItem = workItemStore.GetWorkItem(Convert.ToInt32(workItemId));
+					workItem.Fields[workItemMappings["Priority"]].Value = priority;
+					workItem.Save();
+
+					priority++;
+				}
+			}
 		}
 
 		private TeamFoundationServer GetServer()
