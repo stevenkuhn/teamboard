@@ -1,0 +1,4 @@
+<appSettings>
+	<add key="tfsUserName" value="{TFSUSERNAME}"/>
+	<add key="tfsPassword" value="{TFSPASSWORD}"/>
+</appSettings>

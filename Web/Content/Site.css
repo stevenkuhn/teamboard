@@ -9,9 +9,17 @@
 #workItemList li
 {
 	float: left; 
-	width: 100px; 
-	height: 90px;
+	width: 150px;
 	margin: 5px 5px 0px 0;
+	font-weight:normal;
+	height: 100px;
+	text-align:center;
+	padding: 2px;
+}
+
+#workItemList li .ui-widget-content
+{
+	font-size: 0.7em;
 }
 
 

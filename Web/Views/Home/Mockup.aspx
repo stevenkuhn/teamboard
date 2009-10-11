@@ -6,23 +6,29 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
    <ul id="workItemList">
-		<li class="ui-state-default">
-			1
+		<li class="ui-widget ui-state-default">
+			<div>Create database</div>
+			
 		</li>
-		<li class="ui-state-default">
-			2
+		<li class="ui-widget ui-state-default">
+			<div>Add notifications for users</div>
+			
 		</li>
-		<li class="ui-state-default">
-			3
+		<li class="ui-widget ui-state-default">
+			<div>Import tickets</div>
+			
 		</li>
-		<li class="ui-state-default">
-			4
+		<li class="ui-widget ui-state-default">
+			<div>Users should be able to add attachments</div>
+			
 		</li>
-		<li class="ui-state-default">
-			5
+		<li class="ui-widget ui-state-default">
+			<div>Add origin</div>
+			
 		</li>
-		<li class="ui-state-default">
-			6
+		<li class="ui-widget ui-state-default">
+			<div>Tickets should not appear on for given system</div>
+			
 		</li>
    </ul>
    <script type="text/javascript" language="javascript">

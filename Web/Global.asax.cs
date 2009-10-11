@@ -7,6 +7,10 @@ using System.Web.Routing;
 using Ninject.Web.Mvc;
 using Ninject;
 using System.Reflection;
+using Ninject.Modules;
+using TeamBoard.Services;
+using TeamBoard.Infrastructure;
+using System.Configuration;
 
 namespace TeamBoard.Web
 {
@@ -18,6 +22,7 @@ namespace TeamBoard.Web
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+			routes.IgnoreRoute("favicon.ico");
 
 			routes.MapRoute(
 				 "Default",                                              // Route name
@@ -35,7 +40,28 @@ namespace TeamBoard.Web
 
 		protected override IKernel CreateKernel()
 		{
-			return new StandardKernel();
+			return new StandardKernel(new DefaultModule());
+		}
+	}
+
+	internal class DefaultModule : NinjectModule
+	{
+		public override void Load()
+		{
+			var config = new TeamBoard.Infrastructure.Configuration();
+			config.TeamFoundationServerName = "https://tfs06.codeplex.com:443";
+			config.Login = ConfigurationManager.AppSettings["tfsUserName"];
+			config.Password = ConfigurationManager.AppSettings["tfsPassword"];
+			config.Domain = "snd";
+			config.WorkItemMappings = new Dictionary<string, Dictionary<string, string>>();
+			config.WorkItemMappings.Add("teamboard", new Dictionary<string, string>(){
+						{"Id","System.Id"},
+						{"Summary", "System.Title"},
+						{"Description", "System.Description"},
+						{"Priority", "CodePlex.Custom"}
+					});
+
+			Bind<IConfiguration>().ToConstant(config);
 		}
 	}
 }
