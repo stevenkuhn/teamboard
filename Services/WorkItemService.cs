@@ -19,7 +19,7 @@ namespace TeamBoard.Services
 			_config = config;
 		}
 
-		public IList<BoardWorkItem> GetWorkItems(string projectName)
+		private IList<BoardWorkItem> GetWorkItems(WorkItemQuery query, Dictionary<string, string> workItemMappings)
 		{
 			var workItems = new List<BoardWorkItem>();
 
@@ -28,34 +28,64 @@ namespace TeamBoard.Services
 				tfs.EnsureAuthenticated();
 				var workItemStore = (WorkItemStore)tfs.GetService(typeof(WorkItemStore));
 
-				var workItemMappings = _config.WorkItemMappings[projectName];
-				if (workItemMappings == null)
-					return workItems;
-
-				Query query = new Query(projectName, workItemMappings);
-				query.AddColumn("Id");
-				query.AddColumn("Summary");
-				query.AddColumn("Description");
-				query.AddColumn("Priority");
-
+				WorkItemCollection results = workItemStore.Query(query.ToString());
 				foreach (TfsWorkItem
-					item in workItemStore.Query(query.ToString()))
+					item in results)
 				{
-					int priority;
-					if (!Int32.TryParse(item.Fields[workItemMappings["Priority"]].Value.ToString(), out priority))
-						priority = 0;
-
-					workItems.Add(new BoardWorkItem()
-						{
-							Summary = item.Title,
-							Description = item.Description,
-							Id = item.Id.ToString(),
-							Priority = priority
-						});
+					var newWorkItem = ConvertToBoardWorkItem(item, workItemMappings);
+					workItems.Add(newWorkItem);
 				}
-
-				return workItems;
 			}
+
+			return workItems;
+		}
+
+		public IList<BoardWorkItem> GetWorkItems(string projectName, string iterationPath)
+		{
+			var workItemMappings = _config.WorkItemMappings[projectName];
+
+			WorkItemQuery query = new WorkItemQuery(projectName, workItemMappings);
+			query.AddColumn("Id");
+			query.AddColumn("Summary");
+			query.AddColumn("Description");
+			query.AddColumn("Priority");
+
+			query.AddCriterion("System.IterationPath", "Under", iterationPath);
+
+			query.AddSort("Priority", "ASC");
+
+			return GetWorkItems(query, workItemMappings);
+		}
+
+		public IList<BoardWorkItem> GetWorkItems(string projectName)
+		{
+			var workItemMappings = _config.WorkItemMappings[projectName];
+
+			WorkItemQuery query = new WorkItemQuery(projectName, workItemMappings);
+			query.AddColumn("Id");
+			query.AddColumn("Summary");
+			query.AddColumn("Description");
+			query.AddColumn("Priority");
+
+			query.AddSort("Priority", "ASC");
+
+			return GetWorkItems(query, workItemMappings);
+		}
+
+		private static BoardWorkItem ConvertToBoardWorkItem(TfsWorkItem item, Dictionary<string, string> workItemMappings)
+		{
+			int priority;
+			if (!Int32.TryParse(item.Fields[workItemMappings["Priority"]].Value.ToString(), out priority))
+				priority = 0;
+
+			var newWorkItem = new BoardWorkItem()
+									{
+										Summary = item.Title,
+										Description = item.Description,
+										Id = item.Id.ToString(),
+										Priority = priority
+									};
+			return newWorkItem;
 		}
 
 		public void Update(BoardWorkItem workItem)
@@ -78,7 +108,7 @@ namespace TeamBoard.Services
 			}
 		}
 
-
+		
 
 		private TeamFoundationServer GetServer()
 		{
