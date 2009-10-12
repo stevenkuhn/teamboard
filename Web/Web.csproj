@@ -74,6 +74,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Model\ProjectView.cs" />
+    <Compile Include="Model\ViewModel.cs" />
+    <Compile Include="Model\WorkItemsView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +129,7 @@
     <Content Include="Content\Reset.css" />
     <Content Include="Scripts\jquery-1.3.2-vsdoc2.js" />
     <Content Include="Scripts\jquery-1.3.2.min.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Mockup.aspx" />
     <Content Include="Views\Shared\Site.Master" />
@@ -138,7 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Project\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

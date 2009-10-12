@@ -1,4 +1,32 @@
-﻿
+﻿html
+{
+}
+
+body
+{
+}
+
+#page
+{
+}
+
+#header
+{
+
+padding: 15px 0px 15px 10px;
+	
+}
+
+#content
+{
+	padding: 10px;
+}
+
+h1, h2, h3, h4
+{
+	font-weight:normal;
+}
+
 #workItemList
 {
 	 list-style:none;
@@ -9,64 +37,24 @@
 #workItemList li
 {
 	float: left; 
-	width: 150px;
-	margin: 5px 5px 0px 0;
+	width: 225px;
+	margin: 0px 10px 10px 0;
 	font-weight:normal;
-	height: 100px;
-	text-align:center;
+	height: 60px;
 	padding: 2px;
+}
+
+#workItemList li .header
+{
+	color: #e17009;
+}
+
+#workItemList li .content
+{
+	font-size:.7em;
 }
 
 #workItemList li .ui-widget-content
 {
 	font-size: 0.7em;
 }
-
-
-
-
-
-
-
-/*#test { list-style:none; margin: 0; padding: 0; }
-#test li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center;  }
-
-
-/**.item
-{
-	width: 300px;
-	border: solid 1px black;
-}
-
-.item h2
-{
-	font-weight: normal;
-}
-
-.item .content
-{
-}*/
-
-
-/*.note
-{
-	background-image: url(Images/note_background.png);
-	background-repeat: repeat-x;
-	background-color: #fcf9a1;
-	width:300px;
-}
-
-.note h2
-{
-	font-weight:normal;
-	margin-bottom: 10px;
-	background-color: #fcf9a1;
-	padding:10px;
-	padding-top:5px; padding-bottom:5px;
-}
-
-.note .content
-{
-	padding:10px;
-	padding-top:0px;
-}*/

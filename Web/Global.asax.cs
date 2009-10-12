@@ -25,11 +25,22 @@ namespace TeamBoard.Web
 			routes.IgnoreRoute("favicon.ico");
 
 			routes.MapRoute(
+				"Project",
+				"{projectName}/",
+				new { controller = "Project", action = "Index" }
+			);
+
+			routes.MapRoute(
+				"WorkItems",
+				"{projectName}/workitems",
+				new { controller = "WorkItem", action = "List" }
+			);
+
+			routes.MapRoute(
 				 "Default",                                              // Route name
 				 "{controller}/{action}/{id}",                           // URL with parameters
 				 new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
 			);
-
 		}
 
 		protected override void OnApplicationStarted()

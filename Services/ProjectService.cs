@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.TeamFoundation.Client;
 using System.Net;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
+using System.Linq;
 using TfsProject = Microsoft.TeamFoundation.WorkItemTracking.Client.Project;
 using BoardProject = TeamBoard.Model.Project;
 
@@ -17,6 +18,12 @@ namespace TeamBoard.Services
 		public ProjectService(IConfiguration config)
 		{
 			_config = config;
+		}
+
+		public BoardProject GetProject(string projectName)
+		{
+			return (from project in GetProjects() where string.Equals(project.Name, projectName, StringComparison.OrdinalIgnoreCase) select project)
+				.SingleOrDefault();
 		}
 
 		public IList<BoardProject> GetProjects()
