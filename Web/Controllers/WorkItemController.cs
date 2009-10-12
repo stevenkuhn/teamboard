@@ -14,17 +14,14 @@ namespace TeamBoard.Web.Controllers
 	{
 		public WorkItemController(
 			ProjectService projectService,
-			WorkItemService workItemService,
-			IConfiguration configuration)
+			WorkItemService workItemService)
 		{
 			ProjectService = projectService;
 			WorkItemService = workItemService;
-			Configuration = configuration;
 		}
 
 		public ProjectService ProjectService { get; private set; }
 		public WorkItemService WorkItemService { get; private set; }
-		public IConfiguration Configuration { get; private set; }
 
 		public ActionResult Index()
 		{
