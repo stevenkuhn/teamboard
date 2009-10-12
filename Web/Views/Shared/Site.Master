@@ -19,7 +19,7 @@
 <body>
 	<div id="page">
 		<div id="header" class="ui-widget ui-widget-header">
-			<a href="<%= Url.Content("~/") %>">team board</a>
+			<a href="<%= Url.Content("~/") %>">Team Board</a>
 			<% var projectView = Model as ProjectView;
 				if (Model is ProjectView) { %>
 				/ <%= Html.ActionLink(projectView.Project.Name, "Index", "Project", new { projectName = projectView.Project.Name }, null) %>
